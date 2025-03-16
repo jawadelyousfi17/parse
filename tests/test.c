@@ -1,5 +1,5 @@
-# include "../include/minishell.h"
-# include <readline/readline.h>
+#include "../include/minishell.h"
+#include <readline/readline.h>
 
 char *_trs(t_token_type t)
 {
@@ -29,7 +29,7 @@ char *_trs(t_token_type t)
 }
 
 void _print_tokens(t_token *tokens)
-{   
+{
     printf("\n");
     while (tokens)
     {
@@ -46,6 +46,37 @@ void _print_tokens(t_token *tokens)
 
 int main()
 {
+
+    {
+        // t_token *tokens = ft_new_token("first", TEXT);
+        // ft_add_token(&tokens, "second", TEXT);
+        // ft_add_token(&tokens, "third", TEXT);
+        // ft_add_token(&tokens, "fourth", TEXT);
+        // ft_add_token(&tokens, "fifth", TEXT);
+        // ft_add_token(&tokens, "sixth", TEXT);
+
+        // t_token *t = tokens;
+        // while (t)
+        // {
+        //     if (is_equal(t->value, "first"))
+        //     {
+        //         t = ft_remove_token_and_get_previous(&tokens, t);
+        //         if (!t)
+        //             t = tokens;
+        //         printf("removed new val = %s\n", t->value);
+        //     }
+        //     else
+        //         t = t->next;
+        // }
+
+        // t = tokens;
+        // while (t)
+        // {
+        //     printf("%s\n", t->value);
+        //     t = t->next;
+        // }
+    }
+
     while (TRUE)
     {
         char *line = readline("minishell$ ");
@@ -61,7 +92,4 @@ int main()
             break;
         _print_tokens(tokens);
     }
-    
 }
-
-

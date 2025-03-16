@@ -98,7 +98,7 @@ int ft_expand_vars(t_token **head, t_token *t, t_minishell *m)
     }
     if (!ft_expand_expand(head, *head, m))
         return 0;
-    ft_remove_double_spaces(head);
+    // ft_remove_double_spaces(head);
     return 1;
 }
 

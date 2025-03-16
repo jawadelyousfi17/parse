@@ -50,13 +50,16 @@ t_token *ft_tokenize_espaces(char **s, t_token *t, t_minishell *m, t_token **hea
 int ft_expand_expand(t_token **head, t_token *t, t_minishell *m)
 {
     char *s;
+    int c;
 
     while (t)
     {
         if (t->type == EXPAND)
         {
+            c = 0;
             s = t->value;
             t = ft_remove_token_and_get_previous(head, t);
+            printf("expand: %s\n", s);
             while (*s)
             {
                 if (*s == ' ' || *s == '\t')
