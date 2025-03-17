@@ -1,8 +1,5 @@
-#include "../include/minishell.h"
+#include "utils.h"
 
-// compare two strings
-// return 1 if the strings are equal
-// return 0 if the strings are not equal
 int is_equal(char *s, char *p)
 {
     if (ft_strlen(s) != ft_strlen(p))
@@ -10,9 +7,6 @@ int is_equal(char *s, char *p)
     return ft_strncmp(s, p, ft_strlen(p)) == 0;
 }
 
-// extract a string from a string and return a pointer to the extracted string
-// len is the length of the extracted string
-// flag is a flag to indicate if the extracted string should be added to the garbage collector
 char *ft_strndup(char *s, size_t len, int flag)
 {
     char *r;
@@ -30,3 +24,25 @@ char *ft_strndup(char *s, size_t len, int flag)
     r[i] = 0;
     return r;
 }
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+int	ft_isalpha(int c)
+{
+	if ((c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A'))
+		return (1);
+	return (0);
+}
+
+int	ft_isalnum(int c)
+{
+	if (ft_isdigit(c) || ft_isalpha(c))
+		return (1);
+	return (0);
+}
+
+

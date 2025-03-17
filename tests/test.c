@@ -1,6 +1,16 @@
 #include "../include/minishell.h"
 #include <readline/readline.h>
 
+// Text Colors
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define WHITE "\033[37m"
+#define RESET "\033[0m"
+
 char *_trs(t_token_type t)
 {
     if (t == TEXT)
@@ -33,15 +43,15 @@ void _print_tokens(t_token *tokens)
     printf("\n");
     while (tokens)
     {
-        printf("value: %s, type: %10s", tokens->value, _trs(tokens->type));
+        printf("value: " GREEN "{%s}" RESET "\ntype:" GREEN " %s" RESET, tokens->value, _trs(tokens->type));
         if (tokens->type == HERE_DOC)
-            printf("  is_quoted: %d", tokens->is_quoted);
+            printf(BLUE "\nis_quoted: %d" RESET, tokens->is_quoted);
         if (tokens->type == REDIRECT_INPUT || tokens->type == REDIRECT_OUTPUT || tokens->type == APPEND)
-            printf("   is_ambs: %d", tokens->is_ambs);
-        printf("\n");
+            printf(BLUE "\nis_ambs: %d" RESET, tokens->is_ambs);
+        printf("\n\n");
         tokens = tokens->next;
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 int main()
@@ -77,18 +87,36 @@ int main()
         // }
     }
 
+    char *err;
     while (TRUE)
     {
         char *line = readline("minishell$ ");
         if (!line)
             break;
         add_history(line);
+        if (check_unclosed_quotes(line))
+        {
+            printf("unclosed quotes\n");
+            continue;
+        }
         t_token *tokens = ft_tokenize_input(line, NULL);
         if (!tokens)
             break;
+        if ((err = check_syntax_error(tokens)) != NULL)
+        {
+            printf("syntax error '%s'\n", err);
+            continue;
+        }
         if (!ft_expand_vars(&tokens, tokens, NULL))
             break;
         if (!check_ambs(tokens))
+            break;
+        if (!ft_expand_quoted(tokens, NULL))
+        {
+            printf("error expanding quotes\n");
+            break;
+        }
+        if (!ft_join_tokens(&tokens, NULL))
             break;
         _print_tokens(tokens);
     }

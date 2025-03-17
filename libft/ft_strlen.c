@@ -22,5 +22,5 @@ size_t ft_strlen(const char *s)
     while (*current)
         current++;
 
-    return current - s;  // Return the length as the difference between the end and start
+    return current - s;
 }

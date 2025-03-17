@@ -7,6 +7,9 @@ t_token *ft_tokenize_input(char *s, t_minishell *m)
     int err;
 
     tokens = NULL;
+    s = ft_strtrim(s, " \t", GB_C);
+    if (!s)
+        return (NULL);
     while (*s)
     {
         if (*s == ' ' || *s == '\t')

@@ -3,7 +3,7 @@
 
 int ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m)
 {
-     t_token *token;
+    t_token *token;
     char *r;
 
     if (*(*s + 1) == '<')
@@ -56,10 +56,11 @@ int ft_tokenize_variable(char **s, t_token **head, t_minishell *m)
         return ft_tokenize_squote(s, head, m);
     if (**s != '_' && !ft_isalpha(**s) && **s != '?')
         return ((*s)--, ft_tokenize_txt(s, head, m));
-    while (**s && **s != '?' && (ft_isalnum(**s) || **s == '_'))
-        (*s)++;
     if (**s == '?')
         (*s)++;
+    else
+        while (**s && (ft_isalnum(**s) || **s == '_'))
+            (*s)++;
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
         return (0);
