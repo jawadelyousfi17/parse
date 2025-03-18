@@ -43,3 +43,17 @@ void ft_remove_double_spaces(t_token **tokens)
             t = t->next;
     }
 }
+
+int ft_count_token(t_token *t, t_token_type type)
+{
+    int count;
+
+    count = 0;
+    while (t)
+    {
+        if (t->type == type)
+            count++;
+        t = t->next;
+    }
+    return (count);
+}

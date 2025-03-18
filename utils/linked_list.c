@@ -46,3 +46,18 @@ char *ft_join_list(t_list *t)
     }
     return r;
 }
+
+int	ft_lstsize(t_list *lst)
+{
+	t_list	*tmp;
+	int		size;
+
+	size = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	return (size);
+}

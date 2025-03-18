@@ -7,7 +7,7 @@ t_token *ft_ttokenize_nrm_txt(char **s, t_token *t, t_token **head, int c)
     char *r;
 
     start = *s;
-    while (**s && !ft_strchr(" \t\"'", **s))
+    while (**s && (**s != ' ' && **s != '\t'))
         (*s)++;
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
@@ -17,25 +17,7 @@ t_token *ft_ttokenize_nrm_txt(char **s, t_token *t, t_token **head, int c)
     return ft_add_token_after(head, t, ft_new_token(r, TEXT));
 }
 
-t_token *ft_tokenize_quote_as_txt(char **s, t_token *t, t_token **head, int c)
-{
-    char quote_type;
-    char *start;
-    char *r;
 
-    start = (*s);
-    quote_type = **s;
-    (*s)++;
-    while (**s && **s != quote_type)
-        (*s)++;
-    (*s) += **s == quote_type;
-    r = ft_strndup(start, *s - start, GB_C);
-    if (!r)
-        return (NULL);
-    if (c)
-        return ft_add_token_front(head, r, TEXT);
-    return ft_add_token_after(head, t, ft_new_token(r, TEXT));
-}
 
 t_token *ft_tokenize_espaces(char **s, t_token *t, t_token **head, int c)
 {
@@ -60,8 +42,6 @@ t_token *ft_expand_expand_util(t_token *t, t_token **head, int c, char *s)
     {
         if (*s == ' ' || *s == '\t')
             t = ft_tokenize_espaces(&s, t, head, c);
-        else if (*s == DOUBLE_QUOTE || *s == SINGLE_QUOTE)
-            t = ft_tokenize_quote_as_txt(&s, t, head, c);
         else
             t = ft_ttokenize_nrm_txt(&s, t, head, c);
         if (!t)

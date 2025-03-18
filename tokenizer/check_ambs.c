@@ -1,7 +1,5 @@
 #include "../include/minishell.h"
 
-
-
 char *ft_join_after_redir(t_token *t, int *qt_found)
 {
     char *r;
@@ -37,15 +35,7 @@ int ft_is_ambs(char *s, int qt_found)
         return 1;
     while (*s)
     {
-        if (*s == '"' || *s == '\'')
-        {
-            qt = *s++;
-            while (*s && *s != qt)
-                s++;
-            if (*s)
-                s++;
-        }
-        else if (*s == ' ' || *s == '\t')
+        if (*s == ' ' || *s == '\t')
             return 1;
         else
             s++;

@@ -54,6 +54,49 @@ void _print_tokens(t_token *tokens)
     printf("\n\n");
 }
 
+void _print_data(t_data *d)
+{
+    if (!d->pipe)
+    {
+        if (d->_t_files)
+        {
+            t_list *f = d->_t_files;
+            while (f)
+            {
+                t_files *file = f->content;
+                printf("file: "BLUE"%s" RESET "\ntype: " BLUE "%s" RESET "\nis_ambs: " BLUE "%s" RESET "\n", file->file, _trs(file->redirect_type), file->is_ambs ? "true" : "false");
+                f = f->next;
+            }
+        } else {
+            printf("No files\n");
+        }
+        if (d->_t_cmd)
+        {
+            t_list *c = d->_t_cmd;
+            printf("cmds: ");
+            while (c)
+            {
+                printf(GREEN "{%s} " RESET, c->content);
+                c = c->next;
+            }
+            printf("\n");
+        } else {
+            printf("No cmds\n");
+        }
+        return;
+    }
+
+    t_list *p = d->pipe_cmd;
+    printf("pipes: \n");
+    while (p)
+    {
+        t_data *d = p->content;
+        _print_data(d);
+        p = p->next;
+        printf("\n");
+    }
+}
+
 int main()
 {
 
@@ -118,6 +161,11 @@ int main()
         }
         if (!ft_join_tokens(&tokens, NULL))
             break;
-        _print_tokens(tokens);
+        t_data *d = init_data(tokens, NULL);
+        if (!d)
+            break;
+        _print_data(d);
+        // _print_tokens(tokens);
+    
     }
 }

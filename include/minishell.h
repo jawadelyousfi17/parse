@@ -63,3 +63,5 @@ int ft_join_tokens(t_token **tokens, t_minishell *m);
 
 
 
+// init data
+t_data *init_data(t_token *t, t_minishell *m);
