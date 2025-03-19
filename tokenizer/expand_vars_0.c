@@ -16,10 +16,7 @@ void ft_handle_here_doc_var(t_token *t, t_minishell *m)
                 if (t->type == S_QUOTE || t->type == D_QUOTE)
                     hd_t->is_quoted = 1;
                 if (t->type == VAR)
-                {
                     t->type = TEXT;
-                    t->is_quoted = 1;
-                }
                 t = t->next;
             }
         }

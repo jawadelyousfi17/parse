@@ -30,6 +30,17 @@ int ft_add_token(t_token **tokens, char *value, t_token_type type)
     return 1;
 }
 
+t_token *ft_add_token_current(t_token **tokens, t_token *current, t_token *new)
+{
+    if (!*tokens)
+    {
+        *tokens = new;
+        return new;
+    }
+    current->next = new;
+    return new;
+}
+
 t_token *ft_add_token_front(t_token **tokens, char *value, t_token_type type)
 {
     t_token *new = ft_new_token(value, type);
@@ -56,7 +67,6 @@ t_token *ft_add_token_after(t_token **head, t_token *node, t_token *new)
     return new;
 }
 
-
 t_token *ft_remove_token_and_get_previous(t_token **tokens, t_token *node)
 {
     if (!*tokens || !node)
@@ -76,5 +86,3 @@ t_token *ft_remove_token_and_get_previous(t_token **tokens, t_token *node)
     }
     return NULL;
 }
-
-

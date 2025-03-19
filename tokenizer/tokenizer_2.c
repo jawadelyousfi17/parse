@@ -1,7 +1,7 @@
 
 #include "../include/minishell.h"
 
-int ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m)
 {
     t_token *token;
     char *r;
@@ -12,16 +12,16 @@ int ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m)
         if (!r)
             return (0);
         (*s) += 2;
-        return ft_add_token(head, r, HERE_DOC);
+        return ft_new_token( r, HERE_DOC);
     }
     r = ft_strndup(*s, 1, GB_C);
     if (!r)
         return (0);
     (*s)++;
-    return ft_add_token(head, r, REDIRECT_INPUT);
+    return ft_new_token(r, REDIRECT_INPUT);
 }
 
-int ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m)
 {
     t_token *token;
     char *r;
@@ -32,16 +32,16 @@ int ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m)
         if (!r)
             return (0);
         (*s) += 2;
-        return ft_add_token(head, r, APPEND);
+        return ft_new_token( r, APPEND);
     }
     r = ft_strndup(*s, 1, GB_C);
     if (!r)
         return (0);
     (*s)++;
-    return ft_add_token(head, r, REDIRECT_OUTPUT);
+    return ft_new_token(r, REDIRECT_OUTPUT);
 }
 
-int ft_tokenize_variable(char **s, t_token **head, t_minishell *m)
+t_token *ft_tokenize_variable(char **s, t_token **head, t_minishell *m)
 {
     char *start;
     char *r;
@@ -64,5 +64,5 @@ int ft_tokenize_variable(char **s, t_token **head, t_minishell *m)
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
         return (0);
-    return ft_add_token(head, r, VAR);
+    return ft_new_token(r, VAR);
 }

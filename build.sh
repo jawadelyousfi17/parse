@@ -1,1 +1,1 @@
-cc utils/*.c garbage_collector/*.c tokenizer/*.c tests/test.c libft/libft.a -lreadline -fsanitize=address -o test
+cc utils/*.c garbage_collector/*.c tokenizer/*.c tests/test.c libft/libft.a -lreadline -o test

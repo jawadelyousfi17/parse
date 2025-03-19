@@ -28,14 +28,14 @@
 
 // tokenizer/
 t_token *ft_tokenize_input(char *s, t_minishell *m);
-int ft_tokenize_txt(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_dquote(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_squote(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_pipe(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_space(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m);
-int ft_tokenize_variable(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_txt(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_dquote(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_squote(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_pipe(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_space(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m);
+t_token* ft_tokenize_variable(char **s, t_token **head, t_minishell *m);
 
 // utils
 

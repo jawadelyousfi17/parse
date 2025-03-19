@@ -1,5 +1,7 @@
 #include "../include/minishell.h"
 #include <readline/readline.h>
+#include <readline/history.h>
+#include <time.h>
 
 // Text Colors
 #define RED "\033[31m"
@@ -76,7 +78,7 @@ void _print_data(t_data *d)
             printf("cmds: ");
             while (c)
             {
-                printf(GREEN "{%s} " RESET, c->content);
+                printf(GREEN "{%s} " RESET,(char *) c->content);
                 c = c->next;
             }
             printf("\n");
@@ -133,9 +135,12 @@ int main()
     char *err;
     while (TRUE)
     {
+        clock_t start = clock(); // Start time
+
         char *line = readline("minishell$ ");
         if (!line)
             break;
+        
         add_history(line);
         if (check_unclosed_quotes(line))
         {
@@ -166,6 +171,11 @@ int main()
             break;
         _print_data(d);
         // _print_tokens(tokens);
-    
+        clock_t end = clock(); // End time
+
+    double elapsed_time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Execution time: %.6f seconds\n", elapsed_time);
+    free(line);
+    ft_malloc(1, GB_CLEAR);
     }
 }

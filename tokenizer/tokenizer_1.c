@@ -3,7 +3,7 @@
 
 
 
-int ft_tokenize_space(char **s, t_token **head, t_minishell *m)
+t_token *ft_tokenize_space(char **s, t_token **head,  t_minishell *m)
 {
     char *start;
     char *r;
@@ -14,12 +14,10 @@ int ft_tokenize_space(char **s, t_token **head, t_minishell *m)
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
         return (0);
-    if (!ft_add_token(head, r, SPACES))
-        return (0);
-    return (1);
+    return ft_new_token(r, SPACES);
 }
 
-int ft_tokenize_txt(char **s, t_token **head, t_minishell *m)
+t_token *ft_tokenize_txt(char **s, t_token **head, t_minishell *m)
 {
     char *start;
     char *r;
@@ -32,13 +30,11 @@ int ft_tokenize_txt(char **s, t_token **head, t_minishell *m)
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
         return (0);
-    if (!ft_add_token(head, r, TEXT))
-        return (0);
-    return (1);
+    return ft_new_token(r, TEXT);
 }
 
 
-int ft_tokenize_dquote(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_dquote(char **s, t_token **head, t_minishell *m)
 {
     char *start;
     char *r;
@@ -52,10 +48,10 @@ int ft_tokenize_dquote(char **s, t_token **head, t_minishell *m)
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
         return (0);
-    return ft_add_token(head, r, D_QUOTE);
+    return ft_new_token(r, D_QUOTE);
 }
 
-int ft_tokenize_squote(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_squote(char **s, t_token **head, t_minishell *m)
 {
     char *start;
     char *r;
@@ -68,10 +64,10 @@ int ft_tokenize_squote(char **s, t_token **head, t_minishell *m)
     r = ft_strndup(start, *s - start, GB_C);
     if (!r)
         return (0);
-    return ft_add_token(head, r, S_QUOTE);
+    return ft_new_token(r, S_QUOTE);
 }
 
-int ft_tokenize_pipe(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_pipe(char **s, t_token **head, t_minishell *m)
 {
     char *r;
 
@@ -79,5 +75,5 @@ int ft_tokenize_pipe(char **s, t_token **head, t_minishell *m)
     if (!r)
         return (0);
     (*s)++;
-    return ft_add_token(head, r, PIPE);
+    return ft_new_token(r, PIPE);
 }

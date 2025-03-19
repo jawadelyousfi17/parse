@@ -4,8 +4,8 @@
 
 // Garbage collector
 #define GB_C 0
-#define GB_NC 1
-#define GB_CLEAR 2
+#define GB_NC 2
+#define GB_CLEAR 1
 void *ft_malloc(size_t size, int flag);
 
 // token type
@@ -97,6 +97,8 @@ void ft_remove_token(t_token **tokens, t_token *node);
 t_token *ft_remove_token_and_get_previous(t_token **tokens, t_token *node);
 t_token *ft_add_token_after(t_token **head, t_token *node, t_token *new);
 int ft_count_token(t_token *t, t_token_type type);
+t_token *ft_add_token_current(t_token **tokens, t_token *current, t_token *new);
+
 
 char *ft_getenv(char *name, t_minishell *m);
 int ft_is_operator(t_token *token);
