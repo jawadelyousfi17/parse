@@ -67,11 +67,7 @@ static int execute_heredoc(char *file_path, char *limiter, int is_qt, t_minishel
 int ft_execute_heredoc(t_token *t, t_minishell *m)
 {
     char *file_path;
-    t_token *data;
-    int i;
 
-    i = 0;
-    file_path = NULL;
     while (t)
     {
         if (t->type == HERE_DOC)

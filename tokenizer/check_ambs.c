@@ -1,5 +1,7 @@
 #include "../include/minishell.h"
 
+// to fix: if there is a space in a quoted string, it should not be considered as an ambs
+
 char *ft_join_after_redir(t_token *t, int *qt_found)
 {
     char *r;
