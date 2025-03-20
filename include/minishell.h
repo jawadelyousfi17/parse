@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdint.h>
-
+#include <fcntl.h>
 # include <stdio.h>
-
+#include <readline/readline.h>
 
 
 # define DOUBLE_QUOTE '\"'
@@ -65,3 +65,7 @@ int ft_join_tokens(t_token **tokens, t_minishell *m);
 
 // init data
 t_data *init_data(t_token *t, t_minishell *m);
+
+// expand here doc
+char *ft_expand_here_doc(char *s, t_minishell *m);
+int ft_execute_heredoc(t_token *t, t_minishell *m);

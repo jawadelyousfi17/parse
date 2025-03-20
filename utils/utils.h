@@ -63,7 +63,10 @@ typedef struct s_data
 
 typedef struct s_minishell
 {
-    char **env;
+    char ***env;
+    char ***m_env;
+    int exit_status;
+    t_data *data;
 } t_minishell;
 
 char *ft_strtrim(char const *s1, char const *set, int flag);
@@ -77,6 +80,7 @@ int ft_isalnum(int c);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
 char *ft_strndup(char *s, size_t len, int flag);
 int is_equal(char *s, char *p);
+char	*ft_itoa(int n, int flag);
 
 // lists
 t_list *ft_lstnew(void *content);

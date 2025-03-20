@@ -166,6 +166,11 @@ int main()
         }
         if (!ft_join_tokens(&tokens, NULL))
             break;
+        if (ft_execute_heredoc(tokens, NULL) == 0)
+        {
+            printf("error executing here doc\n");
+            break;
+        }
         t_data *d = init_data(tokens, NULL);
         if (!d)
             break;
