@@ -2,7 +2,6 @@
 
 t_token *ft_ttokenize_nrm_txt(char **s, t_token *t, t_token **head, int c)
 {
-    t_token *token;
     char *start;
     char *r;
 
@@ -21,7 +20,6 @@ t_token *ft_ttokenize_nrm_txt(char **s, t_token *t, t_token **head, int c)
 
 t_token *ft_tokenize_espaces(char **s, t_token *t, t_token **head, int c)
 {
-    t_token *token;
     char *start;
     char *r;
 
@@ -51,7 +49,7 @@ t_token *ft_expand_expand_util(t_token *t, t_token **head, int c, char *s)
     return (t);
 }
 
-int ft_expand_expand(t_token **head, t_token *t, t_minishell *m)
+int ft_expand_expand(t_token **head, t_token *t)
 {
     char *s;
     int c;

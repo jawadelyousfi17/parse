@@ -88,9 +88,9 @@ int ft_expand_quoted(t_token *t, t_minishell *m)
         else if (t->type == S_QUOTE)
         {
             t->value = ft_strtrim(t->value, "'", GB_C);
-            t->type = TEXT;
             if (!t->value)
                 return 0;
+            t->type = TEXT;
         }
         if (t)
             t = t->next;

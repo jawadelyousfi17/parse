@@ -3,7 +3,7 @@
 
 
 
-t_token *ft_tokenize_space(char **s, t_token **head,  t_minishell *m)
+t_token *ft_tokenize_space(char **s)
 {
     char *start;
     char *r;
@@ -17,7 +17,7 @@ t_token *ft_tokenize_space(char **s, t_token **head,  t_minishell *m)
     return ft_new_token(r, SPACES);
 }
 
-t_token *ft_tokenize_txt(char **s, t_token **head, t_minishell *m)
+t_token *ft_tokenize_txt(char **s)
 {
     char *start;
     char *r;
@@ -34,7 +34,7 @@ t_token *ft_tokenize_txt(char **s, t_token **head, t_minishell *m)
 }
 
 
-t_token* ft_tokenize_dquote(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_dquote(char **s)
 {
     char *start;
     char *r;
@@ -51,7 +51,7 @@ t_token* ft_tokenize_dquote(char **s, t_token **head, t_minishell *m)
     return ft_new_token(r, D_QUOTE);
 }
 
-t_token* ft_tokenize_squote(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_squote(char **s)
 {
     char *start;
     char *r;
@@ -67,7 +67,7 @@ t_token* ft_tokenize_squote(char **s, t_token **head, t_minishell *m)
     return ft_new_token(r, S_QUOTE);
 }
 
-t_token* ft_tokenize_pipe(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_pipe(char **s)
 {
     char *r;
 

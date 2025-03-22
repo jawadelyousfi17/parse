@@ -1,9 +1,8 @@
 
 #include "../include/minishell.h"
 
-t_token* ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_redir_in(char **s)
 {
-    t_token *token;
     char *r;
 
     if (*(*s + 1) == '<')
@@ -21,9 +20,8 @@ t_token* ft_tokenize_redir_in(char **s, t_token **head, t_minishell *m)
     return ft_new_token(r, REDIRECT_INPUT);
 }
 
-t_token* ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m)
+t_token* ft_tokenize_redir_out(char **s)
 {
-    t_token *token;
     char *r;
 
     if (*(*s + 1) == '>')
@@ -41,7 +39,7 @@ t_token* ft_tokenize_redir_out(char **s, t_token **head, t_minishell *m)
     return ft_new_token(r, REDIRECT_OUTPUT);
 }
 
-t_token *ft_tokenize_variable(char **s, t_token **head, t_minishell *m)
+t_token *ft_tokenize_variable(char **s)
 {
     char *start;
     char *r;
@@ -49,13 +47,13 @@ t_token *ft_tokenize_variable(char **s, t_token **head, t_minishell *m)
     start = *s;
     (*s)++;
     if (!**s)
-        return ((*s)--, ft_tokenize_txt(s, head, m));
+        return ((*s)--, ft_tokenize_txt(s));
     if (**s == DOUBLE_QUOTE)
-        return ft_tokenize_dquote(s, head, m);
+        return ft_tokenize_dquote(s);
     else if (**s == SINGLE_QUOTE)
-        return ft_tokenize_squote(s, head, m);
+        return ft_tokenize_squote(s);
     if (**s != '_' && !ft_isalpha(**s) && **s != '?')
-        return ((*s)--, ft_tokenize_txt(s, head, m));
+        return ((*s)--, ft_tokenize_txt(s));
     if (**s == '?')
         (*s)++;
     else

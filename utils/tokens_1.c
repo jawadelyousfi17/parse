@@ -1,5 +1,12 @@
 #include "utils.h"
 
+int ft_is_builtin(char *s)
+{
+    if (s == NULL)
+        return 0;
+    return is_equal(s, "echo") || is_equal(s, "cd") || is_equal(s, "pwd") || is_equal(s, "export") || is_equal(s, "unset") || is_equal(s, "env") || is_equal(s, "exit");
+}
+
 void ft_remove_token(t_token **tokens, t_token *node)
 {
     if (!*tokens || !node)

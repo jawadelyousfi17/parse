@@ -7,6 +7,7 @@ char *ft_getenv(char *name, t_minishell *m)
 {
     char *value;
 
+    (void)m;
     value = getenv(name);
     if (!value)
         return ft_strdup("", GB_C);

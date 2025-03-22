@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void ft_handle_here_doc_var(t_token *t, t_minishell *m)
+void ft_handle_here_doc_var(t_token *t)
 {
     t_token *hd_t;
 
@@ -84,7 +84,7 @@ int ft_handle_export_var(t_token *t, t_minishell *m)
 
 int ft_expand_vars(t_token **head, t_token *t, t_minishell *m)
 {
-    ft_handle_here_doc_var(t, m);
+    ft_handle_here_doc_var(t);
     if (!ft_handle_redirection_var(t, m) || !ft_handle_export_var(t, m))
         return 0;
     while (t)
@@ -98,7 +98,7 @@ int ft_expand_vars(t_token **head, t_token *t, t_minishell *m)
         }
         t = t->next;
     }
-    if (!ft_expand_expand(head, *head, m))
+    if (!ft_expand_expand(head, *head))
         return 0;
     return 1;
 }

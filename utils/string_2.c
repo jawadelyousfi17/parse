@@ -10,7 +10,7 @@ int is_equal(char *s, char *p)
 char *ft_strndup(char *s, size_t len, int flag)
 {
     char *r;
-    int i;
+    size_t i;
 
     i = 0;
     r = ft_malloc(len + 1, flag);

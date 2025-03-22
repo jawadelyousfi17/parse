@@ -72,8 +72,6 @@ char *ft_expand_here_doc(char *s, t_minishell *m)
 {
     t_list *h;
     char *expanded;
-    char *tmp;
-    t_list *tmp_h;
 
     h = ft_split_by_var(s, m);
     if (!h)

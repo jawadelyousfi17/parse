@@ -31,8 +31,6 @@ char *ft_join_after_redir(t_token *t, int *qt_found)
 
 int ft_is_ambs(char *s, int qt_found)
 {
-    char qt;
-
     if (ft_strlen(s) == 0 && !qt_found)
         return 1;
     while (*s)

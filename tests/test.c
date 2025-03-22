@@ -42,7 +42,7 @@ char *_trs(t_token_type t)
 
 void _print_tokens(t_token *tokens)
 {
-    printf("\n");
+    printf( CYAN "\n"  RESET);
     while (tokens)
     {
         printf("value: " GREEN "{%s}" RESET "\ntype:" GREEN " %s" RESET, tokens->value, _trs(tokens->type));
@@ -58,38 +58,44 @@ void _print_tokens(t_token *tokens)
 
 void _print_data(t_data *d)
 {
-    if (!d->pipe)
     {
-        if (d->_t_files)
+        if (!d->pipe)
         {
-            t_list *f = d->_t_files;
-            while (f)
+            if (d->files)
             {
-                t_files *file = f->content;
-                printf("file: "BLUE"%s" RESET "\ntype: " BLUE "%s" RESET "\nis_ambs: " BLUE "%s" RESET "\n", file->file, _trs(file->redirect_type), file->is_ambs ? "true" : "false");
-                f = f->next;
+                int i = 0;
+                while (d->files[i])
+                {
+                    t_files *file = d->files[i];
+                    printf("file: " BLUE "%s" RESET "\ntype: " BLUE "%s" RESET "\nis_ambs: " BLUE "%s" RESET "\n", file->file, _trs(file->redirect_type), file->is_ambs ? "true" : "false");
+                    printf("\n");
+                    i++;
+                }
             }
-        } else {
-            printf("No files\n");
-        }
-        if (d->_t_cmd)
-        {
-            t_list *c = d->_t_cmd;
-            printf("cmds: ");
-            while (c)
+            else
             {
-                printf(GREEN "{%s} " RESET,(char *) c->content);
-                c = c->next;
+                printf("No files\n");
             }
-            printf("\n");
-        } else {
-            printf("No cmds\n");
+            if (d->cmd)
+            {
+                int i = 0;
+                printf("cmds: ");
+                while (d->cmd[i])
+                {
+                    printf(GREEN "{%s} " RESET, d->cmd[i]);
+                    i++;
+                }
+                printf("\n");
+            }
+            else
+            {
+                printf("No cmds\n");
+            }
+            return;
         }
-        return;
     }
-
     t_list *p = d->pipe_cmd;
-    printf("pipes: \n");
+    printf(CYAN "PIPES: \n" RESET);
     while (p)
     {
         t_data *d = p->content;
@@ -102,85 +108,17 @@ void _print_data(t_data *d)
 int main()
 {
 
-    {
-        // t_token *tokens = ft_new_token("first", TEXT);
-        // ft_add_token(&tokens, "second", TEXT);
-        // ft_add_token(&tokens, "third", TEXT);
-        // ft_add_token(&tokens, "fourth", TEXT);
-        // ft_add_token(&tokens, "fifth", TEXT);
-        // ft_add_token(&tokens, "sixth", TEXT);
-
-        // t_token *t = tokens;
-        // while (t)
-        // {
-        //     if (is_equal(t->value, "first"))
-        //     {
-        //         t = ft_remove_token_and_get_previous(&tokens, t);
-        //         if (!t)
-        //             t = tokens;
-        //         printf("removed new val = %s\n", t->value);
-        //     }
-        //     else
-        //         t = t->next;
-        // }
-
-        // t = tokens;
-        // while (t)
-        // {
-        //     printf("%s\n", t->value);
-        //     t = t->next;
-        // }
-    }
-
-    char *err;
     while (TRUE)
     {
-        clock_t start = clock(); // Start time
-
         char *line = readline("minishell$ ");
         if (!line)
-            break;
-        
+            continue;
         add_history(line);
-        if (check_unclosed_quotes(line))
-        {
-            printf("unclosed quotes\n");
-            continue;
-        }
-        t_token *tokens = ft_tokenize_input(line, NULL);
-        if (!tokens)
-            break;
-        if ((err = check_syntax_error(tokens)) != NULL)
-        {
-            printf("syntax error '%s'\n", err);
-            continue;
-        }
-        if (!ft_expand_vars(&tokens, tokens, NULL))
-            break;
-        if (!check_ambs(tokens))
-            break;
-        if (!ft_expand_quoted(tokens, NULL))
-        {
-            printf("error expanding quotes\n");
-            break;
-        }
-        if (!ft_join_tokens(&tokens, NULL))
-            break;
-        if (ft_execute_heredoc(tokens, NULL) == 0)
-        {
-            printf("error executing here doc\n");
-            break;
-        }
-        t_data *d = init_data(tokens, NULL);
+        t_data *d = ft_initialize_data(line, NULL);
         if (!d)
-            break;
+            continue;
         _print_data(d);
-        // _print_tokens(tokens);
-        clock_t end = clock(); // End time
-
-    double elapsed_time = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Execution time: %.6f seconds\n", elapsed_time);
-    free(line);
-    ft_malloc(1, GB_CLEAR);
+        free(line);
+        ft_malloc(1, GB_CLEAR);
     }
 }

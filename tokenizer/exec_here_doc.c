@@ -51,7 +51,7 @@ static int execute_heredoc(char *file_path, char *limiter, int is_qt, t_minishel
     {
         line = readline("> ");
         if (!line)
-            return (close(fd), 0);
+            return (close(fd), 1);
         if (is_equal(line, limiter))
         {
             free(line);
@@ -72,6 +72,7 @@ int ft_execute_heredoc(t_token *t, t_minishell *m)
     {
         if (t->type == HERE_DOC)
         {
+            t->type = HERE_DOC_REDIRECT;
             file_path = create_tmp();
             if (file_path == NULL)
                 return 0;
